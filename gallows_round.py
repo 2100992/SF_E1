@@ -4,12 +4,11 @@ from collections import defaultdict
 
 
 class Round:
-    word = None
-    unlucky_attempts = 4
 
-    def __init__(self, wordset):
+    def __init__(self, wordset, max_unlucky_attempts=4):
         self.word = random.choice(wordset).upper()
         self.named_letters = defaultdict(int)
+        self.max_unlucky_attempts = max_unlucky_attempts
 
     @property
     def hint(self):
@@ -31,17 +30,15 @@ class Round:
 
     @property
     def game_over(self):
-        if self.penalty_points > self.unlucky_attempts:
+        if self.penalty_points > self.max_unlucky_attempts:
             return True
-        else:
-            return False
+        return False
 
     @property
     def win(self):
         if '_' not in self.hint and not self.game_over:
             return True
-        else:
-            return False
+        return False
 
     def set_letter(self, letters):
         for l in letters:
@@ -52,5 +49,4 @@ class Round:
             return f"\n\nИгра проиграна! \n Было загадано слово - {self.word} \n Отгаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"
         elif self.win:
             return f"\n\n{self.hint}\nВы победили!!!\n\n"
-        else:
-            return f"\nПродолжаем разговор! \n Угаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"
+        return f"\nПродолжаем разговор! \n Угаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"

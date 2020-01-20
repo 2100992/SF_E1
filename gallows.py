@@ -46,7 +46,7 @@ class Round:
 
     def __str__(self):
         if self.game_over:
-            return f"\n\nИгра проиграна! \n Было загадано слово - {self.word} \n Отгаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"
+            return f"\n\nВы проиграли! \n Было загадано слово - {self.word} \n Отгаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"
         elif self.win:
             return f"\n\n{self.hint}\nВы победили!!!\n\n"
         return f"\nПродолжаем разговор! \n Угаданы следующие буквы - {self.hint}. \n Штрафных баллов - {self.penalty_points}!\n\n"

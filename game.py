@@ -1,6 +1,6 @@
 import random
 
-from gallows_round import Round
+from gallows import Round
 
 from h import WORDS_SET
 

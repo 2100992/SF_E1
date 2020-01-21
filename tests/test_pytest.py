@@ -3,7 +3,7 @@ import pytest
 from gallows import Round
 
 WORD_SET = ['testing']
-test_round = Round(WORD_SET)
+new_round = Round(WORD_SET)
 
 letters_sets = [
     '',
@@ -37,7 +37,7 @@ wins = [
     False,
 ]
 
-game_over = [
+games_over = [
     False,
     False,
     False,
@@ -52,3 +52,16 @@ messages = [
     'Вы победили!',
     'Вы проиграли',
 ]
+
+@pytest.fixture(params=range(5))
+def iter(request):
+    return request.param
+
+
+def test_round(iter):
+    new_round.set_letter(letters_sets[iter])
+    assert new_round.hint == hints[iter]
+    assert new_round.penalty_points == penalty_points[iter]
+    assert new_round.win == wins[iter]
+    assert new_round.game_over == games_over[iter]
+    assert new_round.__str__() == messages[iter]

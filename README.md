@@ -12,3 +12,12 @@
 * склонировать или скачать репозиторий;
 * установить python версии выше 3.7
 * запустить `python game.py` или `python3 game.py` в зависимости от настройки ОС
+
+
+
+# basic_todo_list
+[![Travis][build-badge]][build]
+
+
+[build-badge]: https://img.shields.io/travis/tomasmor42/basic_todo_list/master.png?style=flat-square
+[build]: https://travis-ci.org/tomasmor42/basic_todo_list

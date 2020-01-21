@@ -64,4 +64,4 @@ def test_round(iter):
     assert new_round.penalty_points == penalty_points[iter]
     assert new_round.win == wins[iter]
     assert new_round.game_over == games_over[iter]
-    assert new_round.__str__() == messages[iter]
+    assert messages[iter] in new_round.__str__()

@@ -4,6 +4,7 @@ from collections import defaultdict
 
 
 class Round:
+    '''class containing most of the game's logic "gallows"'''
 
     def __init__(self, wordset, max_unlucky_attempts=4):
         self.word = random.choice(wordset).upper()
@@ -12,6 +13,10 @@ class Round:
 
     @property
     def hint(self):
+        '''method calculates a hint depending on the letters already used
+        returns result like property thanks to decorator
+        '''
+        
         hint = ''
         for l in self.word:
             if self.named_letters[l]:

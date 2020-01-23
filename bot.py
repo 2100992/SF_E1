@@ -1,5 +1,5 @@
-from SF_E1.gallows import Round
-from SF_E1.h import WORDS_SET
+from gallows import Round
+from h import WORDS_SET
 from telegram_bot import TOKEN, User
 import telebot
 
@@ -35,7 +35,7 @@ def gallows_game_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     user_round = None
-    
+
     user = get_user(message)
 
     if message.text and user.user_round:

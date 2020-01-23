@@ -40,8 +40,8 @@ def send_text(message):
         user.user_round.set_letter(message.text)
         message = str(user.user_round)
     
-    if user.user_round.win or user.user_round.game_over:
-        user.user_round = None
+        if user.user_round.win or user.user_round.game_over:
+            user.user_round = None
 
     bot.send_message(user.id, message)
 

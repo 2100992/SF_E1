@@ -43,7 +43,7 @@ def send_text(message):
         if user.user_round.win or user.user_round.game_over:
             user.user_round = None
 
-    bot.send_message(user.id, message)
+        bot.send_message(user.id, message)
 
 
 

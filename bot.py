@@ -29,7 +29,7 @@ def gallows_game_message(message):
     user_round = user.user_round = Round(WORDS_SET)
 
     bot.send_message(
-        user.id, f'Отлично! Я загадал слово {user_round.hint} . \n Назови свою букву!')
+        user.id, f'Отлично! Я загадал слово.\n{user_round.hint}\n Назови свою букву!')
 
 
 @bot.message_handler(content_types=['text'])

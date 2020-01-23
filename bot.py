@@ -1,31 +1,55 @@
+from SF_E1.gallows import Round
+from SF_E1.h import WORDS_SET
 from telegram_bot import TOKEN, User
 import telebot
 
 bot = telebot.TeleBot(TOKEN)
 users = {}
 
-@bot.message_handler(commands=['start'])
-def start_message(message):
-    # print(f'dir(message.chat.id) = {dir(message.chat.id)}')
-    print(f'message.chat.id = {message.chat.id}')
 
+def get_user(message):
     if not users.get(message.chat.id):
         users[message.chat.id] = User(message.chat)
+    return users[message.chat.id]
 
-    user = users[message.chat.id]
 
-    print(f'username = {user.username}')
-    print(f'first_name = {user.first_name}')
-    print(f'last_name = {user.last_name}')
+@bot.message_handler(commands=['start'])
+def start_message(message):
 
-    bot.send_message(message.chat.id, f'Привет, {user.username}! Ты написал мне /start')
-    # bot.send_message(message.chat.id, f'Привет, {message.chat.username}! Ты написал мне /start')
+    user = get_user(message)
+
+    bot.send_message(
+        user.id, f'Привет, {user.username}! Хочешь сыграем в игру /gallows ?')
+
+
+@bot.message_handler(commands=['gallows'])
+def gallows_game_message(message):
+    user = get_user(message)
+
+    user_round = user.user_round = Round(WORDS_SET)
+
+    bot.send_message(
+        user.id, f'Отлично! Я загадал слово {user_round.hint} . \n Назови свою букву!')
+
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
-    if message.text == 'Сыграем в игру':
-        bot.send_message(message.chat.id, 'Привет, мой создатель')
-    elif message.text == 'Пока':
-        bot.send_message(message.chat.id, 'Прощай, создатель')
+    user_round = None
+    
+    user = get_user(message)
+
+    if message.text and user.user_round:
+        user_round = user.user_round
+        user_round.set_letter(message.text)
+
+    bot.send_message(user.id, user_round)
+
+    if user_round.win or user_round.game_over:
+        user_round = None
+    
+    
+
+
+
 
 bot.polling()

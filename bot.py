@@ -34,24 +34,16 @@ def gallows_game_message(message):
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
-    user_round = None
-
     user = get_user(message)
 
     if message.text and user.user_round:
-        user_round = user.user_round
-        user_round.set_letter(message.text)
-        message = str(user_round)
+        user.user_round.set_letter(message.text)
+        message = str(user.user_round)
     
-    if user_round.win or user_round.game_over:
-        user_round = None
+    if user.user_round.win or user.user_round.game_over:
+        user.user_round = None
 
     bot.send_message(user.id, message)
-
-    
-    
-    
-
 
 
 

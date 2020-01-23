@@ -9,8 +9,13 @@ def start_message(message):
     print(f'dir(message.chat) = {dir(message.chat)}')
 
     users[message.chat.id] = User(message.chat.id)
+    user = users[message.chat.id]
 
-    bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
+    print(f'username = {user.username}')
+    print(f'first_name = {user.first_name}')
+    print(f'last_name = {user.last_name}')
+
+    bot.send_message(message.chat.id, f'Привет {user.username}, ты написал мне /start')
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
